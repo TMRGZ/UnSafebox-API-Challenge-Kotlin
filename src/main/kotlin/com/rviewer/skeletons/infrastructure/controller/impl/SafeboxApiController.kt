@@ -15,15 +15,12 @@ class SafeboxApiController(
     private val safeboxApplicationService: SafeboxApplicationService,
     private val itemApplicationService: ItemApplicationService
 ) : SafeboxApi {
-    override suspend fun createSafebox(safeboxRequestDto: SafeboxRequestDto): ResponseEntity<CreatedSafeboxResponseDto> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun createSafebox(safeboxRequestDto: SafeboxRequestDto): ResponseEntity<CreatedSafeboxResponseDto> =
+        safeboxApplicationService.createSafebox(safeboxRequestDto)
 
-    override fun getSafeboxItems(id: Long): ResponseEntity<Flow<SafeboxItemDto>> {
-        TODO("Not yet implemented")
-    }
+    override fun getSafeboxItems(id: Long): ResponseEntity<Flow<SafeboxItemDto>> =
+        itemApplicationService.getSafeboxItems(id)
 
-    override suspend fun saveSafeboxItems(id: Long, safeboxItemDto: Flow<SafeboxItemDto>): ResponseEntity<Unit> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun saveSafeboxItems(id: Long, safeboxItemDto: Flow<SafeboxItemDto>): ResponseEntity<Unit> =
+        itemApplicationService.saveSafeboxItems(id, safeboxItemDto)
 }
