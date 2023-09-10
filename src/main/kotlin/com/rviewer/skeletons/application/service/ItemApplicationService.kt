@@ -8,6 +8,6 @@ interface ItemApplicationService {
 
     fun getSafeboxItems(id: Long): ResponseEntity<Flow<SafeboxItemDto>>
 
-    fun saveSafeboxItems(id: Long, safeboxItemDto: Flow<SafeboxItemDto>): ResponseEntity<Unit>
+    suspend fun saveSafeboxItems(id: Long, safeboxItemDto: Flow<SafeboxItemDto>): ResponseEntity<Unit>
 
 }

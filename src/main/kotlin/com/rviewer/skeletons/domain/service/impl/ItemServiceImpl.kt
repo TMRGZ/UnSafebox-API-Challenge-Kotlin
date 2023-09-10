@@ -21,6 +21,6 @@ class ItemServiceImpl(
 
     override suspend fun save(safeboxId: Long, item: Item): Item =
         safeboxService.getSafebox(safeboxId)?.let {
-            itemRepository.save(item.copy(safeboxId = safeboxId))
+            itemRepository.save(item.copy(safeboxId = it.id))
         } ?: throw SafeboxDoesNotExistException()
 }

@@ -6,16 +6,15 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.reactive.result.method.annotation.ResponseEntityExceptionHandler
 
 @RestControllerAdvice
-class RestExceptionHandler {
+class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
-    @ExceptionHandler
-    fun safeboxNotFound(exception: SafeboxDoesNotExistException) =
-        ResponseEntity.notFound().build<Unit>()
+    @ExceptionHandler(SafeboxDoesNotExistException::class)
+    fun safeboxNotFound() = ResponseEntity.notFound().build<Unit>()
 
-    @ExceptionHandler
-    fun safeboxAlreadyExists(exception: SafeboxAlreadyExistsException) =
-        ResponseEntity.status(HttpStatus.CONFLICT).build<Unit>()
+    @ExceptionHandler(SafeboxAlreadyExistsException::class)
+    fun safeboxAlreadyExists() = ResponseEntity.status(HttpStatus.CONFLICT).build<Unit>()
 
 }

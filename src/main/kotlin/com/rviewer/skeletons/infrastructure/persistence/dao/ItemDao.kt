@@ -6,7 +6,7 @@ import org.springframework.data.relational.core.mapping.Table
 
 @Table("ITEM")
 data class ItemDao(
-    @Id @Column("_ID") private val id: Long,
-    @Column("_CONTENT") private val content: String,
-    @Column("SAFEBOX_ID") private val safeboxId: Long
+    @Id @Column("_ID") val id: Long,
+    @Column("_CONTENT") val content: String,
+    @Column("SAFEBOX_ID") val safeboxId: Long
 )

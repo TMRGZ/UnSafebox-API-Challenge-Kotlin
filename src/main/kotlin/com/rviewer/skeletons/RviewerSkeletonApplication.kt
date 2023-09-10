@@ -4,9 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-open class RviewerSkeletonApplication {
+open class RviewerSkeletonApplication
 
-    fun main(args: Array<String>) {
-        runApplication<RviewerSkeletonApplication>(*args)
-    }
+fun main(args: Array<String>) {
+    runApplication<RviewerSkeletonApplication>(*args)
 }

@@ -3,6 +3,7 @@ import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
 
 plugins {
     kotlin("jvm") version "1.9.10"
+    kotlin("kapt") version "1.5.30"
     id("org.springframework.boot") version "3.1.1"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     id("groovy")
@@ -28,11 +29,12 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.7.3")
+    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect")
     // Swagger
     implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.1.0")
     // Map Struct
-    implementation("org.mapstruct:mapstruct:1.4.0.Final")
-    annotationProcessor("org.mapstruct:mapstruct-processor:1.4.0.Final")
+    implementation("org.mapstruct:mapstruct:1.5.5.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
     // API First
     implementation("org.openapitools:jackson-databind-nullable:0.2.4")
     // Testing
@@ -46,6 +48,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     runtimeOnly("org.postgresql:r2dbc-postgresql")
+    runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("io.r2dbc:r2dbc-postgresql:0.8.13.RELEASE")
     testImplementation("io.r2dbc:r2dbc-h2")
     testImplementation("com.h2database:h2:2.1.214")
@@ -66,7 +69,8 @@ tasks.register<GenerateTask>("buildServer") {
         "performBeanValidation" to "true",
         "useSpringBoot3" to "true",
         "reactive" to "true",
-        "additionalModelTypeAnnotations" to "@lombok.Generated"
+        "additionalModelTypeAnnotations" to "@lombok.Generated",
+        "serializationLibrary" to "jackson"
     )
 }
 

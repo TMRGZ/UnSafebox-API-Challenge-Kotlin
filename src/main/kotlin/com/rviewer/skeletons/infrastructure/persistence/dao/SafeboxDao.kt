@@ -6,7 +6,7 @@ import org.springframework.data.relational.core.mapping.Table
 
 @Table("SAFEBOX")
 data class SafeboxDao(
-    @Id @Column("_ID") private val id: Long,
-    @Column("_NAME") private val name: String,
-    @Column("_PASSWORD") private val password: String
+    @Id @Column("_ID") val id: Long,
+    @Column("_NAME") val name: String,
+    @Column("_PASSWORD") val password: String
 )

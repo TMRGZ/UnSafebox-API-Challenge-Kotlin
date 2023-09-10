@@ -6,6 +6,7 @@ import com.rviewer.skeletons.application.service.ItemApplicationService
 import com.rviewer.skeletons.domain.service.ItemService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.toList
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
@@ -20,8 +21,11 @@ class ItemApplicationServiceImpl(
             .map(itemDtoMapper::map)
             .run { ResponseEntity.ok(this) }
 
-    override fun saveSafeboxItems(id: Long, safeboxItemDto: Flow<SafeboxItemDto>): ResponseEntity<Unit> {
-        safeboxItemDto.map(itemDtoMapper::map).map { itemService.save(id, it) }
+    override suspend fun saveSafeboxItems(id: Long, safeboxItemDto: Flow<SafeboxItemDto>): ResponseEntity<Unit> {
+        safeboxItemDto.map(itemDtoMapper::map)
+            .map { itemService.save(id, it) }
+            .toList()
+
         return ResponseEntity.status(HttpStatus.CREATED).build()
     }
 }
